@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="/generate_key" method="post">
+        <button type="submit">Generate Key</button>
+    </form>
+
+    <form action="/encrypt" method="post">
+        <input type="text" name="file_path" placeholder="Enter file path to encrypt">
+        <button type="submit">Encrypt File</button>
+    </form>
+
+    <form action="/decrypt" method="post">
+        <input type="text" name="file_path" placeholder="Enter file path to decrypt">
+        <button type="submit">Decrypt File</button>
+    </form>
+
+    <div id="status-message">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message | safe }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+{% endblock %}

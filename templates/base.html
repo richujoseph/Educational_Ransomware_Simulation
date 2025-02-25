@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ransomware Simulation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Educational Ransomware Simulation</h1>
+        <img src="{{ url_for('static', filename='images/cybersecurity.jpg') }}" alt="Cybersecurity Image" width="400">
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
+
