@@ -1,19 +1,213 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Ransomware Simulation</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Ransomware Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #141526;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo-container {
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            color: #779AEF;
+            font-size: 50px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            color: #779AEF;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .description {
+            text-align: center;
+            max-width: 800px;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .tabs {
+            display: flex;
+            width: 100%;
+            border-bottom: 1px solid #2d2d3a;
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            color: #779AEF;
+            font-weight: bold;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid #779AEF;
+        }
+
+        .content-area {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            width: 100%;
+            max-width: 500px;
+            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            background-color: #1e1f30;
+            border: 1px solid #2d2d3a;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: transparent;
+            color: #779AEF;
+            border: 1px solid #779AEF;
+            border-radius: 5px;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #779AEF;
+            color: #141526;
+        }
+
+        #status-message {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        #status-message ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #status-message li {
+            background-color: #2d2d3a;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border-left: 4px solid #779AEF;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #aaa;
+            text-align: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .footer a {
+            color: #779AEF;
+            text-decoration: none;
+        }
+
+        .footer span {
+            color: #779AEF;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Educational Ransomware Simulation</h1>
-        <img src="{{ url_for('static', filename='images/cybersecurity.jpg') }}" alt="Cybersecurity Image" width="400">
-    </header>
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
-    <script src="{{ url_for('static', filename='main.js') }}"></script>
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo-icon">🔒</div>
+            <div class="logo-text">Educational Ransomware Simulation</div>
+        </div>
+
+        <div class="description">
+            Educational Ransomware Simulation helps users analyze and understand ransomware behavior by simulating attacks in a controlled environment. It enables security researchers to study encryption methods, detect malicious activities, and develop mitigation strategies.
+        </div>
+
+        <div class="tabs">
+            <div class="tab active">FILE</div>
+        </div>
+
+        <div class="content-area">
+            {% block content %}{% endblock %}
+        </div>
+
+        <div class="footer">
+            By submitting data above, you are agreeing to our <a href="{{ url_for('terms_of_service') }}">Terms of Service</a> and <a href="{{ url_for('privacy_notice') }}">Privacy Notice</a>, and to the <a href="{{ url_for('data_sharing') }}"><span>sharing of your</span></a>
+            <br>Sample submission with the security community. Please do not submit any personal information; we are not
+            <br>responsible for the contents of your submission. <a href="{{ url_for('data_sharing') }}">Learn more</a>.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Status message timeout
+            const statusMessage = document.getElementById("status-message");
+            if (statusMessage) {
+                setTimeout(() => {
+                    const messages = statusMessage.querySelectorAll('li');
+                    if (messages.length > 0) {
+                        messages.forEach(msg => {
+                            msg.style.opacity = '0';
+                            msg.style.transition = 'opacity 0.5s';
+                        });
+                        setTimeout(() => {
+                            statusMessage.innerHTML = "";
+                        }, 500);
+                    }
+                }, 5000);
+            }
+        });
+    </script>
 </body>
 </html>
-

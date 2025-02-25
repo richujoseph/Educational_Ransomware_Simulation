@@ -1,0 +1,35 @@
+# Ignore the virtual environment
+venv/
+*.pyc
+__pycache__/
+
+# Ignore environment variables & security keys
+.env
+*.key
+
+# Ignore IDE/editor config files
+.vscode/
+*.swp
+
+# Ignore compiled Python files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignore dependencies installed via pip
+dist/
+build/
+*.egg-info/
+
+# Ignore log files & cache
+*.log
+*.sqlite3
+instance/
+
+# Ignore static & generated files (if applicable)
+static/uploads/
+static/cache/
+
+# Ignore Git-specific files
+.git/
