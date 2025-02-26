@@ -49,7 +49,7 @@ pip install -r requirements.txt
 This project is **strictly for educational purposes**. Do not use it for malicious activities. The author holds no responsibility for any misuse.
 
 ## License
-This project is licensed under the **MIT License**. See the full license below.
+This project is licensed under the **MIT License**.
 
 ---
 
